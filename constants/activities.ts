@@ -1,0 +1,4 @@
+export enum Activities {
+  PLACES_TO_STAY = 'PLACES_TO_STAY',
+  FIND_EXPERIENCES = 'FIND_EXPERIENCES',
+}

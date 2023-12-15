@@ -1,5 +1,6 @@
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   reactStrictMode: true,
-  basePath: '/juanita-soho',
-  assetPrefix: '/juanita-soho/',
 };
+
+module.exports = nextConfig;

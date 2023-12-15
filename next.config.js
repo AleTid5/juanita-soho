@@ -1,6 +1,5 @@
 module.exports = {
   reactStrictMode: true,
-  images: {
-    domains: ['links.papareact.com'],
-  },
+  basePath: '/juanita-soho',
+  assetPrefix: '/juanita-soho/',
 };

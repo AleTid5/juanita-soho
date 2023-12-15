@@ -1,10 +1,10 @@
-export interface IExploreNearby {
+export type ExploreNearbyType = {
   location: string;
   img: string;
   distance: string;
-}
+};
 
-export interface ILiveAnywhere {
+export type PresentationGalleryType = {
   img: string;
   title: string;
-}
+};

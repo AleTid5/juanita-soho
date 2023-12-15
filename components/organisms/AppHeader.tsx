@@ -6,12 +6,12 @@ import AppHeaderOption from '@/components/atoms/AppHeaderOption';
 import AppSearchBarMobile from '@/components/molecules/AppSearchBarMobile';
 import { Bars4Icon, GlobeAltIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import { UserCircleIcon } from '@heroicons/react/24/solid';
-import type { IExploreNearby } from 'types';
+import type { ExploreNearbyType } from 'types';
 import { formatGuests, formatRangeDate } from 'utils';
 import { Activities } from '../../constants/activities';
 
 type AppHeaderProps = {
-  exploreNearby?: IExploreNearby[];
+  exploreNearby?: ExploreNearbyType[];
   searchPage?: boolean;
   query?: any;
 };

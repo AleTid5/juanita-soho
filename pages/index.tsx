@@ -1,30 +1,27 @@
-import React, { FC } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import AppHead from '@/components/atoms/AppHead';
 import AppHeader from '@/components/organisms/AppHeader';
-import AppHero from '@/components/atoms/AppHero';
 import AppSection from '@/components/atoms/AppSection';
 import AppBanner from '@/components/atoms/AppBanner';
 import AppFooter from '@/components/atoms/AppFooter';
 import AppNearby from '@/components/atoms/AppNearby';
-import { IExploreNearby, ILiveAnywhere } from 'types';
-import { getExploreNearby, getLiveAnywhere } from 'utils/data';
+import MainBanner from '@/components/atoms/MainBanner';
+import type { ExploreNearbyType, PresentationGalleryType } from 'types';
+import { exploreNearby, presentationGallery } from '../constants/data';
 
-interface IHomeDataProps {
-  exploreNearby: IExploreNearby[];
-  liveAnywhere: ILiveAnywhere[];
-}
+type HomeDataProps = {
+  exploreNearby: ExploreNearbyType[];
+  presentationGallery: PresentationGalleryType[];
+};
 
-const Home: FC<IHomeDataProps> = ({ exploreNearby, liveAnywhere }) => {
+const Home = ({ exploreNearby, presentationGallery }: HomeDataProps) => {
   return (
     <>
       <AppHead />
       <AppHeader exploreNearby={exploreNearby} />
       <main>
-        {/* hero */}
-        <AppHero />
-        {/* explore nearby section */}
+        <MainBanner />
         <AppSection
           title="Explore Nearby"
           className="grid grid-cols-2 lg:gap-x-4 gap-x-1 gap-y-2 sm:grid-cols-3 lg:grid-cols-4"
@@ -33,12 +30,11 @@ const Home: FC<IHomeDataProps> = ({ exploreNearby, liveAnywhere }) => {
             <AppNearby key={index} data={data} />
           ))}
         </AppSection>
-        {/* live anywhere section */}
         <AppSection
-          title="Live Anywhere"
+          title="Gallery"
           className="grid grid-cols-2 lg:gap-x-4 gap-x-1 gap-y-2 lg:grid-cols-4"
         >
-          {liveAnywhere.map((data, index) => (
+          {presentationGallery.map((data, index) => (
             <Link key={index} href="#">
               <div className="p-2 duration-300 lg:p-3 gap-y-4 active:scale-105 active:bg-gray-200 active:bg-opacity-40 rounded-xl">
                 <div className="relative w-full h-40 mb-2 md:h-60 lg:h-72">
@@ -61,22 +57,15 @@ const Home: FC<IHomeDataProps> = ({ exploreNearby, liveAnywhere }) => {
             </Link>
           ))}
         </AppSection>
-        {/* bottom banner */}
         <AppBanner />
       </main>
-      {/* footer */}
       <AppFooter />
     </>
   );
 };
 
-export const getStaticProps = async () => {
-  const exploreNearby = await getExploreNearby();
-  const liveAnywhere = await getLiveAnywhere();
-
-  return {
-    props: { exploreNearby, liveAnywhere },
-  };
-};
+export const getStaticProps = () => ({
+  props: { exploreNearby, presentationGallery },
+});
 
 export default Home;

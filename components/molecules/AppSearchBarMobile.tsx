@@ -11,10 +11,10 @@ import {
   ChevronRightIcon,
   MagnifyingGlassIcon,
 } from '@heroicons/react/24/outline';
-import { IExploreNearby } from 'types';
+import { ExploreNearbyType } from 'types';
 
 interface IAppSearchBarMobileProps {
-  exploreNearby: IExploreNearby[];
+  exploreNearby: ExploreNearbyType[];
   searchPage?: boolean;
 }
 

@@ -7,15 +7,9 @@ import AppBanner from '@/components/atoms/AppBanner';
 import AppFooter from '@/components/atoms/AppFooter';
 import AppNearby from '@/components/atoms/AppNearby';
 import MainBanner from '@/components/atoms/MainBanner';
-import type { ExploreNearbyType, PresentationGalleryType } from 'types';
 import { exploreNearby, presentationGallery } from '../constants/data';
 
-type HomeDataProps = {
-  exploreNearby: ExploreNearbyType[];
-  presentationGallery: PresentationGalleryType[];
-};
-
-const Home = ({ exploreNearby, presentationGallery }: HomeDataProps) => {
+const Home = () => {
   return (
     <>
       <AppHead />
@@ -63,9 +57,5 @@ const Home = ({ exploreNearby, presentationGallery }: HomeDataProps) => {
     </>
   );
 };
-
-export const getStaticProps = () => ({
-  props: { exploreNearby, presentationGallery },
-});
 
 export default Home;

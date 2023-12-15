@@ -10,11 +10,11 @@ import AppHeader from '@/components/organisms/AppHeader';
 import AppPlaceCard from '@/components/atoms/AppPlaceCard';
 import AppMap from '@/components/atoms/AppMap';
 import { formatGuests, formatRangeDate } from 'utils';
-import { MapIcon, ClipboardIcon } from '@heroicons/react/24/solid';
+import { ClipboardIcon, MapIcon } from '@heroicons/react/24/solid';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
-import { getSearch } from 'utils/data';
+import { searchResults } from '../constants/data';
 
-const Search = ({ searchResults }) => {
+const Search = () => {
   const router = useRouter();
   const query = router.query;
   const [visibleMapButton, setVisibleMapButton] = useState<boolean>(true);
@@ -191,14 +191,6 @@ const Search = ({ searchResults }) => {
       {!isFullMap && <AppFooter />}
     </div>
   );
-};
-
-export const getServerSideProps = async () => {
-  const searchResults = await getSearch();
-
-  return {
-    props: { searchResults },
-  };
 };
 
 export default Search;

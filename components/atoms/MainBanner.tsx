@@ -1,11 +1,12 @@
 import Image from 'next/image';
+import { getImage } from '../../utils/imagesUtils';
 
 const MainBanner = () => {
   return (
     <section className="relative h-[65vh] md:h-[85vh]">
       <div className="absolute z-10 w-full bg-gradient-to-b from-transparent-black to-transparent h-28" />
       <Image
-        src="/assets/images/home-9-draw.jpg"
+        src={getImage('home-9-draw.jpg')}
         layout="fill"
         alt="hero"
         objectFit="cover"

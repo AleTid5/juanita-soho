@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { getImage } from '../../utils/imagesUtils';
 
 const AppBanner = () => {
   return (
@@ -9,7 +10,7 @@ const AppBanner = () => {
           <div className="h-[400px] lg:h-[450px] xl:h-[500px] 2xl:h-[600px] object-cover rounded-3xl">
             <div className="absolute inset-0 z-10 md:hidden" />
             <Image
-              src="/assets/images/planetario.jpg"
+              src={getImage('planetario.jpg')}
               alt="banner"
               layout="fill"
               objectFit="cover"

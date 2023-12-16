@@ -10,7 +10,11 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <link rel="shortcut icon" href="juanita-soho/favicon.ico" type="image/x-icon" />
+          <link
+            rel="shortcut icon"
+            href="/juanita-soho/favicon.ico"
+            type="image/x-icon"
+          />
           <link
             rel="apple-touch-icon"
             sizes="180x180"

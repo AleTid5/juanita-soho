@@ -2,13 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import AppLogo, { EAppLogo } from '@/components/atoms/AppLogo';
 import AppSearchBar from '@/components/molecules/AppSearchBar';
-import AppHeaderOption from '@/components/atoms/AppHeaderOption';
 import AppSearchBarMobile from '@/components/molecules/AppSearchBarMobile';
-import { Bars4Icon, GlobeAltIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid';
-import { UserCircleIcon } from '@heroicons/react/24/solid';
+import { GlobeAltIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import type { ExploreNearbyType } from 'types';
 import { formatGuests, formatRangeDate } from 'utils';
-import { Activities } from '../../constants/activities';
 
 type AppHeaderProps = {
   exploreNearby?: ExploreNearbyType[];
@@ -19,19 +16,11 @@ type AppHeaderProps = {
 const AppHeader = ({ exploreNearby, searchPage, query }: AppHeaderProps) => {
   const [isSnapTop, setIsSnapTop] = useState<boolean>(!searchPage);
   const [isActiveSearch, setIsActiveSearch] = useState<boolean>(!searchPage);
-  const [activeMenu, setActiveMenu] = useState<Activities | null>(
-    Activities.PLACES_TO_STAY
-  );
 
   const handleOnScroll = () => {
     const position = window.scrollY;
-    if (position >= 50) {
-      setIsSnapTop(false);
-      setIsActiveSearch(false);
-    } else {
-      setIsSnapTop(true);
-      setIsActiveSearch(true);
-    }
+    setIsSnapTop(position < 50);
+    setIsActiveSearch(position < 50);
   };
 
   const headerBehavior = () => {
@@ -116,7 +105,7 @@ const AppHeader = ({ exploreNearby, searchPage, query }: AppHeaderProps) => {
                   : 'text-gray-500 hover:bg-gray-100 '
               } flex items-center h-10 px-4 rounded-full font-medium tracking-wide text-sm`}
             >
-              Become a host
+              Go to booking
             </Link>
             <Link
               href="/"
@@ -128,10 +117,6 @@ const AppHeader = ({ exploreNearby, searchPage, query }: AppHeaderProps) => {
             >
               <GlobeAltIcon className="h-5" />
             </Link>
-            <button className="flex items-center pl-3 pr-1 bg-white border border-gray-200 rounded-full h-11 hover:shadow-md">
-              <Bars4Icon className="h-5 mr-2 text-gray-300" />
-              <UserCircleIcon className="h-10 text-gray-300" />
-            </button>
           </div>
         </div>
         <AppSearchBar

@@ -32,9 +32,8 @@ const AppHeader = ({ exploreNearby, searchPage, query }: AppHeaderProps) => {
   };
 
   useEffect(() => {
-    if (!searchPage) {
-      window.addEventListener('scroll', handleOnScroll);
-    }
+    if (!searchPage) window.addEventListener('scroll', handleOnScroll);
+
     return () => window.removeEventListener('scroll', handleOnScroll);
   }, [searchPage]);
 

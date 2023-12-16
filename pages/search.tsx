@@ -41,7 +41,7 @@ const Search = () => {
     };
     window.addEventListener('scroll', handleOnScroll);
     return () => window.removeEventListener('scroll', handleOnScroll);
-  });
+  }, []);
 
   const getGuests = (guests) => {
     const totalGuests = formatGuests(guests, { noInfants: true });

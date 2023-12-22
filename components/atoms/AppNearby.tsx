@@ -1,15 +1,16 @@
 import { FC } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ExploreNearbyType } from '../../types';
 
-interface IAppNearbyProps {
-  data: { location: string; img: string; distance: string };
+type AppNearbyProps = {
+  data: ExploreNearbyType;
   isSmall?: boolean;
-}
+};
 
-const AppNearby: FC<IAppNearbyProps> = ({ data, isSmall }) => {
+const AppNearby = ({ data, isSmall }: AppNearbyProps) => {
   return (
-    <Link href="/">
+    <Link href={data.link} target="_blank">
       <div
         key={data.location}
         className={`${

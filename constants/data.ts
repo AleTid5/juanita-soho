@@ -1,45 +1,54 @@
 import { getImage } from '../utils/imagesUtils';
+import { getGoogleMapsPlace } from '../utils/googleMapsUtils';
 
 export const exploreNearby = [
   {
     img: getImage('5j2.webp'),
-    location: 'Big Ben Buenos Aires',
+    location: "Buenos Aires' Obelisco",
     distance: '30-minute metro',
+    link: getGoogleMapsPlace('2kEuZTmL6VqncaR6A'),
   },
   {
     img: getImage('1to.webp'),
     location: 'Puente de la Mujer',
     distance: '45-minute bus',
+    link: getGoogleMapsPlace('2mwZ3J7KWK6SQrRk6'),
   },
   {
     img: getImage('40m.webp'),
     location: 'Puerto Madero',
     distance: '30-minute bus',
+    link: getGoogleMapsPlace('6pYtZcFFm8BuZhZL7'),
   },
   {
     img: getImage('msp.webp'),
     location: 'Biblioteca Nacional Mariano Moreno',
     distance: '20-minute bus',
+    link: getGoogleMapsPlace('S3DDSv1FQNdtDQAi8'),
   },
   {
     img: getImage('2k3.webp'),
     location: 'Parque el Rosedal',
     distance: '15-minute bus',
+    link: getGoogleMapsPlace('z7q6FKTKKH7UvC3G8'),
   },
   {
     img: getImage('ynx.webp'),
     location: 'Jardín Japonés',
     distance: '15-minute bus',
+    link: getGoogleMapsPlace('H6BusrJuY9ZR1Sf79'),
   },
   {
     img: getImage('kji.webp'),
     location: 'Hipódromo de Palermo',
     distance: '10-minute walk',
+    link: getGoogleMapsPlace('LFuXdFWA8xVjoAZH9'),
   },
   {
     img: getImage('41m.webp'),
     location: 'Alto Palermo Shopping',
     distance: '10-minute bus',
+    link: getGoogleMapsPlace('Fz3agZHyNsPp72mL6'),
   },
 ];
 

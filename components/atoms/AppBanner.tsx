@@ -29,7 +29,7 @@ const AppBanner = () => {
               In the vibrant neighborhood of Palermo
             </p>
             <button className="px-6 py-2 text-sm font-medium text-white bg-gray-500 rounded-lg sm:text-base sm:py-3">
-              Get Inspired
+              Book now!
             </button>
           </div>
         </Link>

@@ -66,7 +66,6 @@ const AppSearchOptionButton = ({
         )}
       </div>
 
-      {/* clear icon */}
       <AppClearButton
         onClick={onClear}
         active={value}

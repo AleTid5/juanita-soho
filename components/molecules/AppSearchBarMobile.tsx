@@ -33,7 +33,6 @@ const AppSearchBarMobile: FC<IAppSearchBarMobileProps> = ({
 
   return (
     <>
-      {/* mobile search button */}
       <div className="container block w-full md:hidden">
         <div className="relative flex items-center justify-center h-12 bg-gray-100 rounded-full">
           {searchPage && (
@@ -55,7 +54,6 @@ const AppSearchBarMobile: FC<IAppSearchBarMobileProps> = ({
           </button>
         </div>
       </div>
-      {/* mobile search section */}
       <section
         id="close"
         className={`z-50 fixed inset-0 bg-white rounded-t-3xl px-4 ${
@@ -113,7 +111,6 @@ const AppSearchBarMobile: FC<IAppSearchBarMobileProps> = ({
           setActiveStep(false);
         }}
       />
-      {/* bottom navigation */}
       <AppMobileNavigation />
     </>
   );

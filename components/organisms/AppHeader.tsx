@@ -104,7 +104,7 @@ const AppHeader = ({ exploreNearby, searchPage, query }: AppHeaderProps) => {
                   : 'text-gray-500 hover:bg-gray-100 '
               } flex items-center h-10 px-4 rounded-full font-medium tracking-wide text-sm`}
             >
-              Go to booking
+              Book now
             </Link>
             <Link
               href="/"

@@ -1,30 +1,30 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import AppHead from '@/components/atoms/AppHead';
-import AppHeader from '@/components/organisms/AppHeader';
-import AppSection from '@/components/atoms/AppSection';
-import AppBanner from '@/components/atoms/AppBanner';
-import AppFooter from '@/components/atoms/AppFooter';
-import AppNearby from '@/components/atoms/AppNearby';
-import MainBanner from '@/components/atoms/MainBanner';
+import AppHead from '@/components/app-head';
+import Header from '@/components/header';
+import Section from '@/components/section';
+import AppBanner from '@/components/app-banner';
+import Footer from '@/components/footer';
+import Nearby from '@/components/nearby';
+import MainBanner from '@/components/main-banner';
 import { exploreNearby, presentationGallery } from '../constants/data';
 
 const Home = () => {
   return (
     <>
       <AppHead />
-      <AppHeader exploreNearby={exploreNearby} />
+      <Header exploreNearby={exploreNearby} />
       <main>
         <MainBanner />
-        <AppSection
+        <Section
           title="Explore Nearby"
           className="grid grid-cols-2 lg:gap-x-4 gap-x-1 gap-y-2 sm:grid-cols-3 lg:grid-cols-4"
         >
           {exploreNearby.map((data, index) => (
-            <AppNearby key={index} data={data} />
+            <Nearby key={index} data={data} />
           ))}
-        </AppSection>
-        <AppSection
+        </Section>
+        <Section
           title="Gallery"
           className="grid grid-cols-2 lg:gap-x-4 gap-x-1 gap-y-2 lg:grid-cols-4"
         >
@@ -50,10 +50,10 @@ const Home = () => {
               </div>
             </Link>
           ))}
-        </AppSection>
+        </Section>
         <AppBanner />
       </main>
-      <AppFooter />
+      <Footer />
     </>
   );
 };

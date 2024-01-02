@@ -4,15 +4,15 @@ import Link from 'next/link';
 import { Marker } from 'react-map-gl';
 import { getCenter } from 'geolib';
 import Image from 'next/image';
-import AppFooter from '@/components/atoms/AppFooter';
-import AppHead from '@/components/atoms/AppHead';
-import AppHeader from '@/components/organisms/AppHeader';
-import AppPlaceCard from '@/components/atoms/AppPlaceCard';
-import AppMap from '@/components/atoms/AppMap';
+import Footer from '@/components/footer';
+import AppHead from '@/components/app-head';
+import Header from '@/components/header';
+import PlaceCard from '@/components/place-card';
+import Map from '@/components/map';
 import { formatGuests, formatRangeDate } from 'utils';
 import { ClipboardIcon, MapIcon } from '@heroicons/react/24/solid';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
-import { searchResults } from '../constants/data';
+import { searchResults } from 'constants/data';
 
 const Search = () => {
   const router = useRouter();
@@ -64,7 +64,7 @@ const Search = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <AppHead />
-      <AppHeader searchPage query={{ location, checkIn, checkOut, guests }} />
+      <Header searchPage query={{ location, checkIn, checkOut, guests }} />
       <main
         className={`${
           !isFullMap && 'lg:grid-cols-[700px,1fr] xl:grid-cols-[840px,1fr]'
@@ -109,7 +109,7 @@ const Search = () => {
 
           <section>
             {searchResults.map((result) => (
-              <AppPlaceCard key={result.long + result.lat} data={result} />
+              <PlaceCard key={result.long + result.lat} data={result} />
             ))}
           </section>
         </div>
@@ -119,7 +119,7 @@ const Search = () => {
             map ? 'block fixed left-0 right-0 bottom-0 top-0' : 'hidden'
           } sm:block sm:sticky top-[86px] flex-grow bg-yellow-900 bg-opacity-10`}
         >
-          <AppMap center={getCenterMap()}>
+          <Map center={getCenterMap()}>
             <button
               className="items-center hidden p-3 m-4 text-gray-500 duration-300 bg-white border border-gray-200 rounded-lg shadow-lg sm:flex active:scale-90"
               onClick={() => (isFullMap ? setIsFullMap(false) : setIsFullMap(true))}
@@ -163,7 +163,7 @@ const Search = () => {
                 </button>
               </Marker>
             ))}
-          </AppMap>
+          </Map>
         </section>
 
         <button
@@ -188,7 +188,7 @@ const Search = () => {
         </button>
       </main>
 
-      {!isFullMap && <AppFooter />}
+      {!isFullMap && <Footer />}
     </div>
   );
 };

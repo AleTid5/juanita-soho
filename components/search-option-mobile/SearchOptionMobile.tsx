@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import SearchOptionWrapperMobile from '@/components/search-option-wrapper-mobile';
@@ -7,7 +6,6 @@ import Counter from '@/components/counter';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import { useDataContext } from 'hooks/useDataContext';
 import { DATA_ACTION_TYPES } from 'context/actionTypes';
-import { Activities } from 'constants/activities';
 
 type AppSearchOptionMobileProps = {
   active: boolean;
@@ -15,15 +13,10 @@ type AppSearchOptionMobileProps = {
 };
 
 const SearchOptionMobile = ({ active, onClose }: AppSearchOptionMobileProps) => {
-  const stepName = [
-    'What are you looking for?',
-    'When will you be there?',
-    "Who's coming?",
-  ];
+  const stepName = ['When will you be there?', "Who's coming?"];
   const [step, setStep] = useState<number>(1);
   const router = useRouter();
-
-  const [{ location, checkIn, checkOut, guests }, dispatch] = useDataContext();
+  const [{ checkIn, checkOut, guests }, dispatch] = useDataContext();
 
   return (
     <div
@@ -41,7 +34,6 @@ const SearchOptionMobile = ({ active, onClose }: AppSearchOptionMobileProps) => 
         </h2>
         <SearchOptionWrapperMobile
           haveNavigation={step !== 1}
-          title={location || 'Location'}
           handleOnBack={() => {
             setStep((prev) => prev - 1);
             if (step === 1) {
@@ -53,22 +45,13 @@ const SearchOptionMobile = ({ active, onClose }: AppSearchOptionMobileProps) => 
             if (step === 3) dispatch({ type: DATA_ACTION_TYPES.RESET_GUESTS });
           }}
         >
-          {step === 1 && (
-            <Step1
-              handleOnChoose={(choice) => {
-                if (choice === Activities.PLACES_TO_STAY) setStep(2);
-                if (choice === Activities.FIND_EXPERIENCES) setStep(4);
-              }}
-            />
-          )}
-          {step === 2 && <Step2 handleOnNext={() => setStep(3)} />}
-          {step === 3 && (
-            <Step3
+          {step === 1 && <Step1 handleOnNext={() => setStep((s) => s + 1)} />}
+          {step === 2 && (
+            <Step2
               handleOnNext={() => {
                 router.push({
                   pathname: '/search',
                   query: {
-                    location,
                     checkIn: checkIn?.toISOString(),
                     checkOut: checkOut?.toISOString(),
                     guests: JSON.stringify(guests),
@@ -88,30 +71,7 @@ const SearchOptionMobile = ({ active, onClose }: AppSearchOptionMobileProps) => 
   );
 };
 
-const Step1 = ({ handleOnChoose }) => {
-  return (
-    <>
-      <button
-        className="flex items-center justify-between w-full p-4 mb-3 text-left border border-gray-200 shadow-lg rounded-xl"
-        onClick={() => handleOnChoose(Activities.PLACES_TO_STAY)}
-      >
-        <div>
-          <h4 className="font-medium">Find a place to stay</h4>
-          <p className="text-xs text-gray-300">Entire homes, rooms & more</p>
-        </div>
-        <Image
-          src="/assets/place-to-stay.jpg"
-          alt="place to stay"
-          width={50}
-          height={50}
-          className="rounded-lg"
-        />
-      </button>
-    </>
-  );
-};
-
-const Step2 = ({ handleOnNext }) => {
+const Step1 = ({ handleOnNext }) => {
   const [{ checkIn, checkOut }, dispatch] = useDataContext();
   return (
     <>
@@ -145,7 +105,7 @@ const Step2 = ({ handleOnNext }) => {
   );
 };
 
-const Step3 = ({ handleOnNext }) => {
+const Step2 = ({ handleOnNext }) => {
   const [{ guests }, dispatch] = useDataContext();
   return (
     <>

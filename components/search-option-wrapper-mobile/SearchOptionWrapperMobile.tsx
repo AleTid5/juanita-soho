@@ -4,13 +4,11 @@ import { useDataContext } from 'hooks/useDataContext';
 import { formatGuests, formatRangeDate } from 'utils';
 
 type AppSearchOptionWrapperMobileProps = PropsWithChildren & {
-  title: string;
   handleOnBack: () => void;
   haveNavigation: boolean;
 };
 
 const SearchOptionWrapperMobile = ({
-  title,
   children,
   handleOnBack,
   haveNavigation,
@@ -27,7 +25,7 @@ const SearchOptionWrapperMobile = ({
           <ChevronLeftIcon className="h-6 " />
         </button>
         <div className="flex flex-col justify-center w-full text-center">
-          <h3 className="font-medium">{title}</h3>
+          <h3 className="font-medium">Juanita Soho Apartment</h3>
           {checkIn && checkOut && (
             <span className="text-xs text-gray-300">
               {formatRangeDate(checkIn, checkOut)}

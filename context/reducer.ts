@@ -1,9 +1,29 @@
 import { DATA_ACTION_TYPES } from './actionTypes';
 import { initialState } from './store';
 
+const updateGuestCount = (state, key, maxLimit) => {
+  const count = state.guests[key];
+  if (count >= maxLimit) return state;
+
+  if (state.guests.adults === 0) {
+    return {
+      ...state,
+      guests: { ...state.guests, [key]: count + 1, adults: state.guests.adults + 1 },
+    };
+  }
+
+  return { ...state, guests: { ...state.guests, [key]: count + 1 } };
+};
+
+const decreaseGuestCount = (state, key) => {
+  const count = state.guests[key];
+  if (count === 0) return state;
+  return { ...state, guests: { ...state.guests, [key]: count - 1 } };
+};
+
 export const dataReducer = (state, action) => {
   const { type, payload } = action;
-  const { adults, children, infants } = state.guests;
+
   switch (type) {
     case DATA_ACTION_TYPES.SET_LOCATION:
       return { ...state, location: payload };
@@ -24,40 +44,36 @@ export const dataReducer = (state, action) => {
       return { ...state, guests: initialState.guests };
 
     case DATA_ACTION_TYPES.INCREASE_ADULTS:
-      if (adults >= 16) return state;
-      return { ...state, guests: { ...state.guests, adults: adults + 1 } };
+      if (state.guests.adults >= 16) return state;
+      return { ...state, guests: { ...state.guests, adults: state.guests.adults + 1 } };
 
     case DATA_ACTION_TYPES.INCREASE_CHILDREN:
-      if (children >= 5) return state;
-      if (adults <= 0) {
-        return {
-          ...state,
-          guests: { ...state.guests, children: children + 1, adults: adults + 1 },
-        };
-      }
-      return { ...state, guests: { ...state.guests, children: children + 1 } };
+      return updateGuestCount(state, 'children', 5);
 
     case DATA_ACTION_TYPES.INCREASE_INFANTS:
-      if (infants >= 5) return state;
-      if (adults <= 0) {
-        return {
-          ...state,
-          guests: { ...state.guests, infants: infants + 1, adults: adults + 1 },
-        };
-      }
-      return { ...state, guests: { ...state.guests, infants: infants + 1 } };
+      return updateGuestCount(state, 'infants', 5);
+
+    case DATA_ACTION_TYPES.INCREASE_PETS:
+      return updateGuestCount(state, 'pets', 2);
 
     case DATA_ACTION_TYPES.DECREASE_ADULTS:
-      if (adults <= 0) return state;
-      if (adults <= 1 && (children >= 1 || infants >= 1)) return state;
-      return { ...state, guests: { ...state.guests, adults: adults - 1 } };
+      const nonAdults = state.guests.children + state.guests.infants + state.guests.pets;
+
+      if (state.guests.adults === 0 || (state.guests.adults === 1 && nonAdults >= 1))
+        return state;
+
+      return { ...state, guests: { ...state.guests, adults: state.guests.adults - 1 } };
 
     case DATA_ACTION_TYPES.DECREASE_CHILDREN:
-      if (children <= 0) return state;
-      return { ...state, guests: { ...state.guests, children: children - 1 } };
+      return decreaseGuestCount(state, 'children');
 
     case DATA_ACTION_TYPES.DECREASE_INFANTS:
-      if (infants <= 0) return state;
-      return { ...state, guests: { ...state.guests, infants: infants - 1 } };
+      return decreaseGuestCount(state, 'infants');
+
+    case DATA_ACTION_TYPES.DECREASE_PETS:
+      return decreaseGuestCount(state, 'pets');
+
+    default:
+      return state;
   }
 };

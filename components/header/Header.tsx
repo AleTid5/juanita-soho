@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { GlobeAltIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid';
-import { Logo } from 'constants/logo';
+import { GlobeAltIcon } from '@heroicons/react/24/solid';
+import MainLogoText from 'assets/icons/MainLogoText';
 import type { ExploreNearbyType } from 'types';
-import { formatGuests, formatRangeDate } from 'utils';
-import AppLogo from './components/app-logo';
-import SearchBar from './components/search-bar';
 import SearchBarMobile from './components/search-bar-mobile';
 
 type AppHeaderProps = {
@@ -50,43 +47,9 @@ const Header = ({ exploreNearby, searchPage, query }: AppHeaderProps) => {
         >
           <div className="flex items-center h-12">
             <Link href="/">
-              <AppLogo className="hidden xl:block" isSnap={isSnapTop} type={Logo.TEXT} />
-              <AppLogo className="block xl:hidden" isSnap={isSnapTop} type={Logo.LOGO} />
+              <MainLogoText className="block" primaryColor={!isSnapTop} />
             </Link>
           </div>
-          <button
-            className={`${
-              isActiveSearch && 'scale-[1.33] translate-y-[75px] opacity-0 z-[-50]'
-            } ${
-              searchPage ? 'pl-3' : 'pl-6'
-            } relative flex items-center h-12 pr-2 mx-auto text-left transform bg-white border border-gray-200 rounded-full shadow-md cursor-pointer min-w-[320px] hover:shadow-lg md:absolute left-24 lg:left-auto lg:right-1/2 lg:translate-x-1/2 duration-200`}
-            onClick={() => setIsActiveSearch(true)}
-          >
-            {searchPage ? (
-              <span className="flex-grow text-sm font-medium tracking-wide text-gray-500">
-                <span className="px-4 py-1 border-r border-gay-200">
-                  {query.location || (
-                    <span className="font-normal text-gray-300">Location</span>
-                  )}
-                </span>
-                <span className="px-4 py-1 border-r border-gay-200">
-                  {formatRangeDate(query.checkIn, query.checkOut) || (
-                    <span className="font-normal text-gray-300">Add dates</span>
-                  )}
-                </span>
-                <span className="px-4 py-1">
-                  {formatGuests(query.guests, { noInfants: true }) || (
-                    <span className="font-normal text-gray-300">Add guests</span>
-                  )}
-                </span>
-              </span>
-            ) : (
-              <span className="flex-grow text-sm font-medium tracking-wide text-gray-500">
-                Start your search
-              </span>
-            )}
-            <MagnifyingGlassIcon className="h-8 p-2 ml-3 text-white rounded-full bg-primary" />
-          </button>
           <div className="order-last col-span-2 xl:order-none xl:col-span-1" />
           <div className="flex items-center justify-end">
             <Link
@@ -111,11 +74,6 @@ const Header = ({ exploreNearby, searchPage, query }: AppHeaderProps) => {
             </Link>
           </div>
         </div>
-        <SearchBar
-          isActiveHeader={isActiveSearch}
-          searchPage={searchPage}
-          closeSearch={() => setIsActiveSearch(false)}
-        />
         <SearchBarMobile exploreNearby={exploreNearby || []} searchPage={searchPage} />
       </header>
       {isActiveSearch && !isSnapTop && (

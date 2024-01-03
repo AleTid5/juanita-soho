@@ -1,7 +1,7 @@
 import { createContext, useReducer } from 'react';
 import { dataReducer } from './reducer';
 
-interface IInitialState {
+type initialState = {
   location: string;
   checkIn: Date | null;
   checkOut: Date | null;
@@ -9,14 +9,15 @@ interface IInitialState {
     adults: number;
     children: number;
     infants: number;
+    pets: number;
   };
-}
+};
 
-export const initialState: IInitialState = {
+export const initialState: initialState = {
   location: '',
   checkIn: null,
   checkOut: null,
-  guests: { adults: 0, children: 0, infants: 0 },
+  guests: { adults: 0, children: 0, infants: 0, pets: 0 },
 };
 
 export const DataContext = createContext(null);

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { GlobeAltIcon } from '@heroicons/react/24/solid';
 import MainLogoText from 'assets/icons/MainLogoText';
 import type { ExploreNearbyType } from 'types';
+import BookNowButton from './components/book-now-button';
 import SearchBarMobile from './components/search-bar-mobile';
 
 type AppHeaderProps = {
@@ -52,16 +53,7 @@ const Header = ({ exploreNearby, searchPage, query }: AppHeaderProps) => {
           </div>
           <div className="order-last col-span-2 xl:order-none xl:col-span-1" />
           <div className="flex items-center justify-end">
-            <Link
-              href="/"
-              className={`${
-                isSnapTop
-                  ? 'text-white hover:bg-white hover:bg-opacity-10'
-                  : 'text-gray-500 hover:bg-gray-100 '
-              } flex items-center h-10 px-4 rounded-full font-medium tracking-wide text-sm`}
-            >
-              Book now
-            </Link>
+            <BookNowButton isSnapTop={isSnapTop} />
             <Link
               href="/"
               className={`${
